@@ -1,5 +1,5 @@
 class Timer:
-    value = 60            
+    value = 60
     notify = None
 
     def __init__(self, notify=None):
@@ -10,7 +10,7 @@ class Timer:
         value = when
         pass
 
-    def left(self, when):    
+    def left(self, when):
         result = self.value - when
         if(result <= 0):
             notify()
