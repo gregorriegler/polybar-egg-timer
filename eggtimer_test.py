@@ -16,6 +16,14 @@ def test_starts_counting_down():
     assert timer.time(61) == '00:00'  # does not overcount
 
 
+def test_starts_at_non_zero():
+    timer = Timer(60)
+    timer.start(100)
+    assert timer.time(101) == '00:59'
+    assert timer.time(102) == '00:58'
+    assert timer.time(160) == '00:00'
+
+
 def test_notifies_when_over():
     timer = Timer(60, notify)
     timer.start(0)
