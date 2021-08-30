@@ -8,26 +8,31 @@ class Timer:
         self._notify = notify
         self._running = False
 
-    def start(self, when):
-        self._start = when
+    def start(self, timestamp):
+        self._start = timestamp
         self._running = True
 
-    def pause(self, when):
+    def pause(self, timestamp):
         self._running = False
-        self._value = self._seconds_left(when)
+        self._value = self._seconds_left(timestamp)
 
-    def time(self, when):
+    def time(self, timestamp):
         if(not self._running):
             return mmss(self._value)
 
-        result = self._seconds_left(when)
-        if(result == 0 and self._notify):
+        if(self._seconds_left(timestamp) == 0):
+            self._notify_once()
+
+        return mmss(self._seconds_left(timestamp))
+
+    def _notify_once(self):
+        if(self._notify):
             self._notify()
+            self._notify = None
 
-        return mmss(result)
 
-    def _seconds_left(self, when):
-        return max(self._value - (when - self._start), 0)
+    def _seconds_left(self, timestamp):
+        return max(self._value - (timestamp - self._start), 0)
 
 
 def mmss(seconds):

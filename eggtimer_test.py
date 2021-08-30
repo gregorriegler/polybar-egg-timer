@@ -24,9 +24,10 @@ def test_starts_at_non_zero():
     assert timer.time(160) == '00:00'
 
 
-def test_notifies_when_over():
+def test_notifies_once_when_over():
     timer = Timer(60, notify)
     timer.start(0)
+    assert timer.time(60) == '00:00'
     assert timer.time(60) == '00:00'
     assert notified == 'notified'
 
@@ -51,4 +52,4 @@ notified = ''
 
 def notify():
     global notified
-    notified = 'notified'
+    notified += 'notified'
