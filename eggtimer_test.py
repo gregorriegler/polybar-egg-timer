@@ -12,6 +12,7 @@ def test_starts_counting_down():
     timer.start(0)
     assert timer.time(1) == '00:59'
     assert timer.time(2) == '00:58'
+    assert timer.time(2.2) == '00:57'
     assert timer.time(60) == '00:00'
     assert timer.time(61) == '00:00'  # does not overcount
 

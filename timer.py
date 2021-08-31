@@ -30,11 +30,10 @@ class Timer:
             self._notify()
             self._notify = None
 
-
     def _seconds_left(self, timestamp):
         return max(self._value - (timestamp - self._start), 0)
 
 
 def mmss(seconds):
     td = timedelta(seconds=seconds)
-    return str(td)[2:]
+    return str(td)[2:7]
