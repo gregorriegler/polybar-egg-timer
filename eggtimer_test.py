@@ -77,3 +77,5 @@ def test_resumes_after_pause():
     timer.pause(30)
     timer.start(50)
     assert timer.time(60) == '00:20'
+    assert timer.time(70) == '00:10'
+    assert timer.time(80) == '00:00'

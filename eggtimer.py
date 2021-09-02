@@ -16,7 +16,7 @@ async def handle_commands():
             'start': start,
             'pause': pause
         }
-        mapping.get('start')()
+        mapping.get(command)()
 
 
 def start():
@@ -25,7 +25,7 @@ def start():
 
 def pause():
     global timer
-    timer.pause()
+    timer.pause(time.time())
 
 async def run_timer():
     global timer

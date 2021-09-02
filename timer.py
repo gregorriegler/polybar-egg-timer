@@ -14,18 +14,19 @@ class Timer:
         self._running = True
 
     def pause(self, timestamp):
-        self._running = False
         self._current = self._seconds_left(timestamp)
+        self._running = False
 
     def time(self, timestamp):
         if(not self._running):
             return mmss(self._current)
 
-        if(self._seconds_left(timestamp) == 0):
+        seconds_left = self._seconds_left(timestamp)
+        if(seconds_left == 0):
             self._reset()
             self._notify_over()
 
-        return mmss(self._seconds_left(timestamp))
+        return mmss(seconds_left)
 
     def _seconds_left(self, timestamp):
         return max(self._current - (timestamp - self._start), 0)
