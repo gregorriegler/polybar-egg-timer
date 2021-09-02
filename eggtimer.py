@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-from timer import Timer
-from commands import commands
 import time
 import asyncio
+from timer import Timer
+from commands import commands
 
 
 async def main():
@@ -12,11 +12,24 @@ async def main():
 async def handle_commands():
     async for command in commands():
         print(command)
+        mapping = {
+            'start': start,
+            'pause': pause
+        }
+        mapping.get('start')()
 
+
+def start():
+    global timer
+    timer.start(time.time())
+
+def pause():
+    global timer
+    timer.pause()
 
 async def run_timer():
-    timer = Timer(60, lambda st: print(st))
-    timer.start(time.time())
+    global timer
+    timer = Timer(60, lambda: print("ok"))
     while True:
         print(timer.time(time.time()))
         await asyncio.sleep(1)

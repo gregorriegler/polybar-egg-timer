@@ -1,4 +1,20 @@
+import pytest
 from timer import Timer
+
+
+notified = ''
+
+
+def notify():
+    global notified
+    notified += 'notified'
+
+
+@pytest.fixture(autouse=True)
+def run_around_tests():
+    global notified
+    notified = ''
+    yield
 
 
 def test_starts_paused():
@@ -14,7 +30,6 @@ def test_starts_counting_down():
     assert timer.time(2) == '00:58'
     assert timer.time(2.2) == '00:57'
     assert timer.time(60) == '00:00'
-    assert timer.time(61) == '00:00'  # does not overcount
 
 
 def test_starts_at_non_zero():
@@ -29,8 +44,24 @@ def test_notifies_once_when_over():
     timer = Timer(60, notify)
     timer.start(0)
     assert timer.time(60) == '00:00'
-    assert timer.time(60) == '00:00'
     assert notified == 'notified'
+
+
+def test_resets_when_over():
+    timer = Timer(60)
+    timer.start(0)
+    assert timer.time(60) == '00:00'
+    assert timer.time(61) == '01:00'
+    assert timer.time(62) == '01:00' # stopped
+
+
+def test_notifies_after_reset():
+    timer = Timer(60, notify)
+    timer.start(0)
+    timer.time(60) == '00:00'
+    timer.start(100)
+    assert timer.time(160) == '00:00'
+    assert notified == 'notifiednotified'
 
 
 def test_pauses():
@@ -46,11 +77,3 @@ def test_resumes_after_pause():
     timer.pause(30)
     timer.start(50)
     assert timer.time(60) == '00:20'
-
-
-notified = ''
-
-
-def notify():
-    global notified
-    notified += 'notified'
