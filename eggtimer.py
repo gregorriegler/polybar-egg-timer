@@ -5,12 +5,11 @@ import sys
 from timer import Timer
 from commands import commands
 
-# stdout redirect
-# e2e test
 # need main with asyncio.run ??
 # renames
 # pause vs current in timer
 # no more globals, all classes
+# handle_commands misses one layer of abstraction (send command in)
 
 class EggTimerApp:
 
