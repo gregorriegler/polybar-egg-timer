@@ -15,8 +15,8 @@ from commands import commands
 
 class EggTimerApp:
 
-    def __init__(self, multiplicator=1):
-        self._multiplicator = multiplicator
+    def __init__(self, speed=1):
+        self._speed = speed
 
     def main(self):
         asyncio.run(self.egg_timer())
@@ -42,15 +42,15 @@ class EggTimerApp:
         timer.pause(self._timestamp())
 
     def _timestamp(self):
-        return time.time() * self._multiplicator
+        return time.time() * self._speed
 
     async def run_timer(self):
         global timer
         timer = Timer(60, lambda: print("ok"))
         while True:
-            print(timer.time(time.time()))
-            await asyncio.sleep(self._multiplicator)
+            print(timer.time(self._timestamp()))
+            await asyncio.sleep(1/self._speed)
 
 
 if __name__ == "__main__":
-    EggTimerApp().main()
+    EggTimerApp(1000).main()
