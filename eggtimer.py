@@ -4,8 +4,6 @@ import asyncio
 from timer import Timer
 from commands import commands
 
-# top level class
-# seconds multiplier but nonbreaking
 # stdout redirect
 # e2e test
 # need main with asyncio.run ??
