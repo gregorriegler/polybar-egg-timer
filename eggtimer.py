@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import time
 import asyncio
+import sys
 from timer import Timer
 from commands import commands
 
@@ -13,23 +14,34 @@ from commands import commands
 
 class EggTimerApp:
 
-    def __init__(self, speed=1):
+    _quit = False
+
+    def __init__(self, speed=1, stdout=sys.stdout):
         self._speed = speed
+        self._original_stdout = sys.stdout
+        sys.stdout = stdout
 
     def main(self):
         asyncio.run(self.egg_timer())
+
+    def quit(self):
+        sys.stdout = self._original_stdout
+        self._quit = True
 
     async def egg_timer(self):
         await asyncio.gather(self.run_timer(), self.handle_commands())
 
     async def handle_commands(self):
+        mapping = {
+            'start': self.start,
+            'pause': self.pause,
+            'quit': self.quit
+        }
         async for command in commands():
             print(command)
-            mapping = {
-                'start': self.start,
-                'pause': self.pause
-            }
             mapping.get(command)()
+            if(self._quit):
+                break
 
     def start(self):
         global timer
@@ -45,7 +57,7 @@ class EggTimerApp:
     async def run_timer(self):
         global timer
         timer = Timer(60, lambda: print("ok"))
-        while True:
+        while not self._quit:
             print(timer.time(self._timestamp()))
             await asyncio.sleep(1/self._speed)
 
