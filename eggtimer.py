@@ -15,6 +15,7 @@ from commands import commands
 class EggTimerApp:
 
     _quit = False
+    _last_output = None
 
     def __init__(self, duration=60, speed=1, stdout=sys.stdout):
         self._duration = duration
@@ -59,7 +60,11 @@ class EggTimerApp:
         global timer
         timer = Timer(self._duration, lambda: print("ok"))
         while not self._quit:
-            print(timer.time(self._timestamp()))
+            output = timer.time(self._timestamp())
+            if(output != self._last_output):
+                print(output)
+                self._last_output = output
+
             await asyncio.sleep(1/self._speed)
 
 
