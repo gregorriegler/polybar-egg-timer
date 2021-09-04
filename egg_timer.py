@@ -5,17 +5,17 @@ import sys
 from timer import Timer
 from commands import commands
 
-# renames
 # pause vs current in timer
-# no more globals, all classes
 # handle_commands misses one layer of abstraction (send command in)
+# dont print commands
+# notification sound
 
 class EggTimerApp:
 
     _quit = False
     _last_output = None
 
-    def __init__(self, duration=60, speed=1):
+    def __init__(self, duration, speed):
         self._speed = speed
         self._timer = Timer(duration, lambda: print("ok"))
 
