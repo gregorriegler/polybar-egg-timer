@@ -5,10 +5,9 @@ import sys
 from timer import Timer
 from commands import commands
 
-# pause vs current in timer
-# handle_commands misses one layer of abstraction (send command in)
 # dont print commands
 # notification sound
+# loop feature
 
 class EggTimerApp:
 
@@ -23,7 +22,7 @@ class EggTimerApp:
         asyncio.run(self.egg_timer())
 
     async def egg_timer(self):
-        await asyncio.gather(self.run_timer(), self.handle_commands())
+        await asyncio.gather(self.run_timer(), self.receive_commands())
 
     async def run_timer(self):
         while not self._quit:
@@ -31,17 +30,20 @@ class EggTimerApp:
             self.print_once(output)
             await asyncio.sleep(1/(self._speed*2))
 
-    async def handle_commands(self):
+    async def receive_commands(self):
+        async for command in commands():
+            self.handle_command(command)
+            if(self._quit):
+                break
+
+    def handle_command(self, command):
+        print(command)
         mapping = {
             'start': self.start,
             'pause': self.pause,
             'quit': self.quit
         }
-        async for command in commands():
-            print(command)
-            mapping.get(command)()
-            if(self._quit):
-                break
+        mapping.get(command)()
 
     def start(self):
         self._timer.start(self._timestamp())
