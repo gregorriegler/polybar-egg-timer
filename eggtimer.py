@@ -6,6 +6,7 @@ from timer import Timer
 from commands import commands
 
 # need main with asyncio.run ??
+# do not repeat same time on stdout for better e2e tests
 # renames
 # pause vs current in timer
 # no more globals, all classes
@@ -15,7 +16,8 @@ class EggTimerApp:
 
     _quit = False
 
-    def __init__(self, speed=1, stdout=sys.stdout):
+    def __init__(self, duration=60, speed=1, stdout=sys.stdout):
+        self._duration = duration
         self._speed = speed
         self._original_stdout = sys.stdout
         sys.stdout = stdout
@@ -55,11 +57,11 @@ class EggTimerApp:
 
     async def run_timer(self):
         global timer
-        timer = Timer(60, lambda: print("ok"))
+        timer = Timer(self._duration, lambda: print("ok"))
         while not self._quit:
             print(timer.time(self._timestamp()))
             await asyncio.sleep(1/self._speed)
 
 
 if __name__ == "__main__":
-    EggTimerApp(1000).main()
+    EggTimerApp(3, 1000).main()
