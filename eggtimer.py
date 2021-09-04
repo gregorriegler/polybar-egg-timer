@@ -5,8 +5,6 @@ import sys
 from timer import Timer
 from commands import commands
 
-# need main with asyncio.run ??
-# do not repeat same time on stdout for better e2e tests
 # renames
 # pause vs current in timer
 # no more globals, all classes
@@ -67,4 +65,4 @@ class EggTimerApp:
 
 
 if __name__ == "__main__":
-    EggTimerApp(3, 1000).main()
+    EggTimerApp(60, 1).main()
