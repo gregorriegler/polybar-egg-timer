@@ -19,7 +19,7 @@ class Timer:
 
     def time(self, timestamp):
         if(not self._running):
-            return mmss(self._stopped_at)
+            return mmss(self._stopped_at) + '⏸︎'
 
         seconds_left = self._seconds_left(timestamp)
         if(seconds_left == 0):
