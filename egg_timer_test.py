@@ -12,8 +12,8 @@ def test_app_run_through_timer():
     time.sleep(.3)
     os.system('./send_command.py quit')
 
-    exp = '00:03\nstart\n00:02\n00:01\n00:00\nok\n00:03\nquit\n'
-    assert egg_timer_output.read() == exp
+    expected = '00:03\nstart\n00:02\n00:01\n00:00\nok\n00:03\nquit\n'
+    assert egg_timer_output.read() == expected
 
 def test_app_just_quit():
     egg_timer_output = os.popen('./egg_timer.py 3 100')
@@ -21,8 +21,7 @@ def test_app_just_quit():
     time.sleep(.1)
     os.system('./send_command.py quit')
 
-    exp = '00:03\nquit\n'
-    assert egg_timer_output.read() == exp
+    assert egg_timer_output.read() == '00:03\nquit\n'
 
 def test_app_pause():
     egg_timer_output = os.popen('./egg_timer.py 3 100')
