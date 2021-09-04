@@ -12,7 +12,7 @@ def test_app_run_through_timer():
     time.sleep(.3)
     os.system('./send_command.py quit')
 
-    expected = '00:03⏸︎\nstart\n00:02\n00:01\n00:00\nok\n00:03⏸︎\nquit\n'
+    expected = '00:03⏸︎\n00:02\n00:01\n00:00\nok\n00:03⏸︎\n'
     assert egg_timer_output.read() == expected
 
 def test_app_just_quit():
@@ -21,17 +21,21 @@ def test_app_just_quit():
     time.sleep(.1)
     os.system('./send_command.py quit')
 
-    assert egg_timer_output.read() == '00:03⏸︎\nquit\n'
+    assert egg_timer_output.read() == '00:03⏸︎\n'
 
 def test_app_pause():
     egg_timer_output = os.popen('./egg_timer.py 3 100')
 
-    time.sleep(.01)
+    time.sleep(.1)
     os.system('./send_command.py start')
-    time.sleep(.01)
+    time.sleep(.1)
     os.system('./send_command.py pause')
-    time.sleep(.01)
+    time.sleep(.1)
     os.system('./send_command.py quit')
+    time.sleep(.1)
 
-    assert 'pause' in egg_timer_output.read()
+    output = egg_timer_output.read()
+    print(output)
+    assert output.count('⏸︎') == 2
+
 

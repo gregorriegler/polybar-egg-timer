@@ -37,7 +37,6 @@ class EggTimerApp:
                 break
 
     def handle_command(self, command):
-        print(command)
         mapping = {
             'start': self.start,
             'pause': self.pause,
