@@ -18,9 +18,9 @@ class EggTimerApp:
     _last_output = None
 
     def __init__(self, duration=60, speed=1, stdout=sys.stdout):
-        self._duration = duration
         self._speed = speed
         self._original_stdout = sys.stdout
+        self._timer = Timer(duration, lambda: print("ok"))
         sys.stdout = stdout
 
     def main(self):
@@ -46,21 +46,17 @@ class EggTimerApp:
                 break
 
     def start(self):
-        global timer
-        timer.start(self._timestamp())
+        self._timer.start(self._timestamp())
 
     def pause(self):
-        global timer
-        timer.pause(self._timestamp())
+        self._timer.pause(self._timestamp())
 
     def _timestamp(self):
         return time.time() * self._speed
 
     async def run_timer(self):
-        global timer
-        timer = Timer(self._duration, lambda: print("ok"))
         while not self._quit:
-            output = timer.time(self._timestamp())
+            output = self._timer.time(self._timestamp())
             if(output != self._last_output):
                 print(output)
                 self._last_output = output
