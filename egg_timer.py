@@ -15,11 +15,9 @@ class EggTimerApp:
     _quit = False
     _last_output = None
 
-    def __init__(self, duration=60, speed=1, stdout=sys.stdout):
+    def __init__(self, duration=60, speed=1):
         self._speed = speed
-        self._original_stdout = sys.stdout
         self._timer = Timer(duration, lambda: print("ok"))
-        sys.stdout = stdout
 
     def main(self):
         asyncio.run(self.egg_timer())
@@ -52,7 +50,6 @@ class EggTimerApp:
         self._timer.pause(self._timestamp())
 
     def quit(self):
-        sys.stdout = self._original_stdout
         self._quit = True
 
     def _timestamp(self):
@@ -65,4 +62,12 @@ class EggTimerApp:
 
 
 if __name__ == "__main__":
-    EggTimerApp(60, 1).main()
+    duration = 60
+    if(len(sys.argv) > 1):
+        duration = int(sys.argv[1])
+
+    speed = 1
+    if(len(sys.argv) > 2):
+        speed = int(sys.argv[2])
+
+    EggTimerApp(duration, speed).main()
