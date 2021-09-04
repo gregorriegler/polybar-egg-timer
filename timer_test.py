@@ -71,6 +71,14 @@ def test_pauses():
     assert timer.time(60) == '00:30⏸︎'
 
 
+def test_pauses_already_paused():
+    timer = Timer(60)
+    timer.start(0)
+    timer.pause(30)
+    timer.pause(40)
+    assert timer.time(60) == '00:30⏸︎'
+
+
 def test_resumes_after_pause():
     timer = Timer(60)
     timer.start(0)

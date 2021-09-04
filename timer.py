@@ -14,8 +14,9 @@ class Timer:
         self._running = True
 
     def pause(self, timestamp):
-        self._stopped_at = self._seconds_left(timestamp)
-        self._running = False
+        if(self._running):
+            self._stopped_at = self._seconds_left(timestamp)
+            self._running = False
 
     def time(self, timestamp):
         if(not self._running):
