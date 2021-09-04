@@ -26,12 +26,14 @@ class EggTimerApp:
     def main(self):
         asyncio.run(self.egg_timer())
 
-    def quit(self):
-        sys.stdout = self._original_stdout
-        self._quit = True
-
     async def egg_timer(self):
         await asyncio.gather(self.run_timer(), self.handle_commands())
+
+    async def run_timer(self):
+        while not self._quit:
+            output = self._timer.time(self._timestamp())
+            self.print_once(output)
+            await asyncio.sleep(1/(self._speed*2))
 
     async def handle_commands(self):
         mapping = {
@@ -51,17 +53,17 @@ class EggTimerApp:
     def pause(self):
         self._timer.pause(self._timestamp())
 
+    def quit(self):
+        sys.stdout = self._original_stdout
+        self._quit = True
+
     def _timestamp(self):
         return time.time() * self._speed
 
-    async def run_timer(self):
-        while not self._quit:
-            output = self._timer.time(self._timestamp())
-            if(output != self._last_output):
-                print(output)
-                self._last_output = output
-
-            await asyncio.sleep(1/self._speed)
+    def print_once(self, output):
+        if(output != self._last_output):
+            print(output)
+            self._last_output = output
 
 
 if __name__ == "__main__":
