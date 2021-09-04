@@ -1,8 +1,7 @@
-import pytest
 import io
 import threading
 import time
-from eggtimer import EggTimerApp
+from egg_timer import EggTimerApp
 
 def test_app():
     output = io.StringIO()
