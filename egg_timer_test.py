@@ -12,7 +12,7 @@ def test_app_run_through_timer():
     time.sleep(.3)
     os.system('./send_command.py quit')
 
-    expected = '00:03⏸︎\n00:02\n00:01\n00:00\nok\n00:03⏸︎\n'
+    expected = '00:03⏸︎\n00:02\n00:01\n00:00\n00:03⏸︎\n'
     assert egg_timer_output.read() == expected
 
 def test_app_just_quit():

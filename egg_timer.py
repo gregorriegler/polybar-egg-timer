@@ -2,11 +2,12 @@
 import time
 import asyncio
 import sys
+from playsound import playsound
 from timer import Timer
 from commands import commands
 
-# dont print commands
-# notification sound
+# sound configurable
+# actual notification
 # loop feature
 
 class EggTimerApp:
@@ -16,7 +17,7 @@ class EggTimerApp:
 
     def __init__(self, duration, speed):
         self._speed = speed
-        self._timer = Timer(duration, lambda: print("ok"))
+        self._timer = Timer(duration, self.play_sound())
 
     def main(self):
         asyncio.run(self.egg_timer())
@@ -60,6 +61,9 @@ class EggTimerApp:
         if(output != self._last_output):
             print(output)
             self._last_output = output
+
+    def play_sound(self):
+        playsound('notification.wav', False)
 
 
 if __name__ == "__main__":
