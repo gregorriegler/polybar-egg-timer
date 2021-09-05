@@ -8,9 +8,25 @@ from playsound import playsound
 from timer import Timer
 from commands import commands
 
-# sound configurable
+# pause must be toggle
+# sound not playing fully
 # actual notification
 # loop feature
+# mouse wheel changes time
+# sound configurable
+# warn: Dropping unmatched character ︎ (U+fe0e) in '01:00⏸︎' ??
+# better ideas for when address already in use? how to test and run at the same time
+
+# [module/egg-timer]
+# type = custom/script
+
+# exec = /home/gregor/IdeaProjects/eggtimer-python/egg_timer.py
+# tail = true
+
+# format = <label>
+# label = %output%
+
+# click-left = /home/gregor/IdeaProjects/eggtimer-python/send_command.py
 
 class EggTimerApp:
 
@@ -61,7 +77,7 @@ class EggTimerApp:
 
     def print_once(self, output):
         if(output != self._last_output):
-            print(output)
+            print(output, flush=True)
             self._last_output = output
 
     def play_sound(self):
