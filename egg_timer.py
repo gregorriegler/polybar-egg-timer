@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+
 import time
 import asyncio
 import sys
+import os
 from playsound import playsound
 from timer import Timer
 from commands import commands
@@ -17,7 +19,7 @@ class EggTimerApp:
 
     def __init__(self, duration, speed):
         self._speed = speed
-        self._timer = Timer(duration, self.play_sound())
+        self._timer = Timer(duration, self.play_sound)
 
     def main(self):
         asyncio.run(self.egg_timer())
@@ -63,7 +65,8 @@ class EggTimerApp:
             self._last_output = output
 
     def play_sound(self):
-        playsound('notification.wav', False)
+        dir = os.path.dirname(os.path.realpath(__file__))
+        playsound(dir + '/notification.wav', False)
 
 
 if __name__ == "__main__":
