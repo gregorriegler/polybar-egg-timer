@@ -5,16 +5,18 @@ import asyncio
 import sys
 import os
 from playsound import playsound
+from plyer import notification
 from timer import Timer
 from commands import commands
 
+# doc requirements: pip install playsound and plyer
 # customizable format
 # sound not playing fully
 # actual notification
 # mouse wheel changes time
 # sound configurable
 # warn: Dropping unmatched character ︎ (U+fe0e) in '01:00⏸︎' ??
-# better ideas for when address already in use? how to test and run at the same time
+# better ideas for when address already in use? port as argv
 
 # [module/egg-timer]
 # type = custom/script
@@ -34,7 +36,7 @@ class EggTimerApp:
 
     def __init__(self, duration, speed):
         self._speed = speed
-        self._timer = Timer(duration, self.play_sound)
+        self._timer = Timer(duration, self.notify)
 
     def main(self):
         asyncio.run(self.egg_timer())
@@ -79,7 +81,11 @@ class EggTimerApp:
             print(output, flush=True)
             self._last_output = output
 
-    def play_sound(self):
+    def notify(self):
+        self._play_sound()
+        notification.notify(title='Time over')
+
+    def _play_sound(self):
         dir = os.path.dirname(os.path.realpath(__file__))
         playsound(dir + '/notification.wav', False)
 
