@@ -9,14 +9,13 @@ class Timer:
         self._stopped_at = value
         self._running = False
 
-    def start(self, timestamp):
-        self._start = timestamp
-        self._running = True
-
-    def pause(self, timestamp):
+    def toggle_play(self, timestamp):
         if(self._running):
             self._stopped_at = self._seconds_left(timestamp)
             self._running = False
+        else:
+            self._start = timestamp
+            self._running = True
 
     def time(self, timestamp):
         if(not self._running):

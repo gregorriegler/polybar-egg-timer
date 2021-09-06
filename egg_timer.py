@@ -57,17 +57,13 @@ class EggTimerApp:
 
     def handle_command(self, command):
         mapping = {
-            'start': self.start,
-            'pause': self.pause,
+            'toggle_play': self.toggle_play,
             'quit': self.quit
         }
         mapping.get(command)()
 
-    def start(self):
-        self._timer.start(self._timestamp())
-
-    def pause(self):
-        self._timer.pause(self._timestamp())
+    def toggle_play(self):
+        self._timer.toggle_play(self._timestamp())
 
     def quit(self):
         self._quit = True

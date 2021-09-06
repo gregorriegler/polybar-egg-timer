@@ -27,9 +27,9 @@ def test_app_pause():
     egg_timer_output = os.popen('./egg_timer.py 3 100')
 
     time.sleep(.1)
-    os.system('./send_command.py start')
-    time.sleep(.1)
-    os.system('./send_command.py pause')
+    os.system('./send_command.py toggle_play')
+    time.sleep(.03)
+    os.system('./send_command.py toggle_play')
     time.sleep(.1)
     os.system('./send_command.py quit')
     time.sleep(.1)

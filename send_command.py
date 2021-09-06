@@ -8,7 +8,7 @@ PORT = 65441        # The port used by the server
 if(len(sys.argv) > 1):
     command = sys.argv[1]
 else:
-    command = 'start'
+    command = 'toggle_play'
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
