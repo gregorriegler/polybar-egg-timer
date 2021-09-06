@@ -8,10 +8,8 @@ from playsound import playsound
 from timer import Timer
 from commands import commands
 
-# pause must be toggle
 # sound not playing fully
 # actual notification
-# loop feature
 # mouse wheel changes time
 # sound configurable
 # warn: Dropping unmatched character ︎ (U+fe0e) in '01:00⏸︎' ??
@@ -58,12 +56,16 @@ class EggTimerApp:
     def handle_command(self, command):
         mapping = {
             'toggle_play': self.toggle_play,
+            'toggle_loop': self.toggle_loop,
             'quit': self.quit
         }
         mapping.get(command)()
 
     def toggle_play(self):
         self._timer.toggle_play(self._timestamp())
+
+    def toggle_loop(self):
+        self._timer.toggle_loop()
 
     def quit(self):
         self._quit = True

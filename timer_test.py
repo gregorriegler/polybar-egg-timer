@@ -55,6 +55,15 @@ def test_resets_when_over():
     assert timer.time(62) == '01:00⏸︎' # stopped
 
 
+def test_loops():
+    timer = Timer(60)
+    timer.toggle_loop()
+    timer.toggle_play(0)
+    assert timer.time(60) == '↻00:00'
+    assert timer.time(61) == '↻00:59'
+    assert timer.time(62) == '↻00:58' # stopped
+
+
 def test_notifies_after_reset():
     timer = Timer(60, notify)
     timer.toggle_play(0)
