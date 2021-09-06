@@ -8,6 +8,7 @@ from playsound import playsound
 from timer import Timer
 from commands import commands
 
+# customizable format
 # sound not playing fully
 # actual notification
 # mouse wheel changes time

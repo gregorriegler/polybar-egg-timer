@@ -19,8 +19,8 @@ def run_around_tests():
 
 def test_starts_paused():
     timer = Timer(60)
-    assert timer.time(0) == '01:00⏸︎'
-    assert timer.time(1) == '01:00⏸︎'
+    assert timer.time(0) == '01:00 ⏸︎'
+    assert timer.time(1) == '01:00 ⏸︎'
 
 
 def test_starts_counting_down():
@@ -51,17 +51,17 @@ def test_resets_when_over():
     timer = Timer(60)
     timer.toggle_play(0)
     assert timer.time(60) == '00:00'
-    assert timer.time(61) == '01:00⏸︎'
-    assert timer.time(62) == '01:00⏸︎' # stopped
+    assert timer.time(61) == '01:00 ⏸︎'
+    assert timer.time(62) == '01:00 ⏸︎' # stopped
 
 
 def test_loops():
     timer = Timer(60)
     timer.toggle_loop()
     timer.toggle_play(0)
-    assert timer.time(60) == '↻00:00'
-    assert timer.time(61) == '↻00:59'
-    assert timer.time(62) == '↻00:58' # stopped
+    assert timer.time(60) == '🔄 00:00'
+    assert timer.time(61) == '🔄 00:59'
+    assert timer.time(62) == '🔄 00:58' # stopped
 
 
 def test_notifies_after_reset():
@@ -77,7 +77,7 @@ def test_pauses():
     timer = Timer(60)
     timer.toggle_play(0)
     timer.toggle_play(30)
-    assert timer.time(60) == '00:30⏸︎'
+    assert timer.time(60) == '00:30 ⏸︎'
 
 
 def test_resumes_after_toggle_play():

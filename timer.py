@@ -23,7 +23,7 @@ class Timer:
 
     def time(self, timestamp):
         if(not self._running):
-            return self._loop_symbol() + mmss(self._stopped_at) + '⏸︎'
+            return self._loop_symbol() + mmss(self._stopped_at) + ' ⏸︎'
 
         seconds_left = self._seconds_left(timestamp)
         if(seconds_left == 0):
@@ -49,7 +49,7 @@ class Timer:
 
     def _loop_symbol(self):
         if(self._loop):
-            return '↻'
+            return '🔄 '
         else:
             return ''
 
