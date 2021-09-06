@@ -21,6 +21,16 @@ class Timer:
     def toggle_loop(self):
         self._loop = not self._loop
 
+    def longer(self):
+        self.change_time(10)
+
+    def shorter(self):
+        self.change_time(-10)
+
+    def change_time(self, amount):
+        self._value = self._value + amount
+        self._stopped_at = self._stopped_at + amount
+
     def time(self, timestamp):
         if(not self._running):
             return self._loop_symbol() + mmss(self._stopped_at) + ' ⏸︎'

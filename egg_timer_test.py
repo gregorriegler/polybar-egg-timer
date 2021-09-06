@@ -26,6 +26,28 @@ def test_app_just_quit():
     assert egg_timer_output.read() == '00:03 ⏸︎\n'
 
 
+def test_change_time_longer():
+    egg_timer_output = os.popen('./egg_timer.py 10 100')
+
+    time.sleep(.1)
+    os.system('./send_command.py longer')
+    time.sleep(.1)
+    os.system('./send_command.py quit')
+
+    assert egg_timer_output.read() == '00:10 ⏸︎\n00:20 ⏸︎\n'
+
+
+def _test_change_time_shorter():
+    egg_timer_output = os.popen('./egg_timer.py 20 100')
+
+    time.sleep(.1)
+    os.system('./send_command.py shorter')
+    time.sleep(.1)
+    os.system('./send_command.py quit')
+
+    assert egg_timer_output.read() == '00:20 ⏸︎\n00:10 ⏸︎\n'
+
+
 def test_app_pause():
     egg_timer_output = os.popen('./egg_timer.py 3 100')
 

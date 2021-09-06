@@ -88,3 +88,15 @@ def test_resumes_after_toggle_play():
     assert timer.time(60) == '00:20'
     assert timer.time(70) == '00:10'
     assert timer.time(80) == '00:00'
+
+
+def test_longer():
+    timer = Timer(60)
+    timer.longer()
+    assert timer.time(60) == '01:10 ⏸︎'
+
+
+def test_shorter():
+    timer = Timer(60)
+    timer.shorter()
+    assert timer.time(60) == '00:50 ⏸︎'

@@ -9,11 +9,10 @@ from plyer import notification
 from timer import Timer
 from commands import commands
 
+# when counting down show play button
 # doc requirements: pip install playsound and plyer
 # customizable format
 # sound not playing fully
-# actual notification
-# mouse wheel changes time
 # sound configurable
 # warn: Dropping unmatched character ︎ (U+fe0e) in '01:00⏸︎' ??
 # better ideas for when address already in use? port as argv
@@ -21,13 +20,16 @@ from commands import commands
 # [module/egg-timer]
 # type = custom/script
 
-# exec = /home/gregor/IdeaProjects/eggtimer-python/egg_timer.py
+# exec = eggtimer-python/egg_timer.py
 # tail = true
 
 # format = <label>
 # label = %output%
 
-# click-left = /home/gregor/IdeaProjects/eggtimer-python/send_command.py
+# click-left = eggtimer-python/send_command.py
+# click-right = eggtimer-python/send_command.py toggle_loop
+# scroll-up = eggtimer-python/send_command.py longer
+# scroll-down = eggtimer-python/send_command.py shorter
 
 class EggTimerApp:
 
@@ -48,7 +50,7 @@ class EggTimerApp:
         while not self._quit:
             output = self._timer.time(self._timestamp())
             self.print_once(output)
-            await asyncio.sleep(1/(self._speed*2))
+            await asyncio.sleep(1/(self._speed*10))
 
     async def receive_commands(self):
         async for command in commands():
@@ -60,6 +62,8 @@ class EggTimerApp:
         mapping = {
             'toggle_play': self.toggle_play,
             'toggle_loop': self.toggle_loop,
+            'longer': self.longer,
+            'shorter': self.shorter,
             'quit': self.quit
         }
         mapping.get(command)()
@@ -69,6 +73,12 @@ class EggTimerApp:
 
     def toggle_loop(self):
         self._timer.toggle_loop()
+
+    def longer(self):
+        self._timer.longer()
+
+    def shorter(self):
+        self._timer.shorter()
 
     def quit(self):
         self._quit = True
