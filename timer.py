@@ -28,8 +28,11 @@ class Timer:
         self.change_time(-10)
 
     def change_time(self, amount):
-        self._value = self._value + amount
-        self._stopped_at = self._stopped_at + amount
+        new_value = self._value + amount
+        new_stopped_at = self._stopped_at + amount
+        if(new_value > 1 and new_stopped_at > 1):
+            self._value = new_value
+            self._stopped_at = new_stopped_at
 
     def time(self, timestamp):
         if(not self._running):
