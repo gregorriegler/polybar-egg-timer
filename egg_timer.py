@@ -10,6 +10,8 @@ from timer import Timer
 from commands import commands
 
 # when counting down show play button
+# use an arg parsing lib
+# use a string assertion lib
 # doc requirements: pip install playsound and plyer
 # customizable format
 # sound not playing fully

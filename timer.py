@@ -47,7 +47,7 @@ class Timer:
             self._reset(timestamp)
             self._notify_over()
 
-        return self._loop_symbol() + mmss(seconds_left)
+        return self._loop_symbol() + mmss(seconds_left) + ' ▶️'
 
     def _seconds_left(self, timestamp):
         return max(self._stopped_at - (timestamp - self._start), 0)
