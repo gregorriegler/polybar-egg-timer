@@ -9,7 +9,6 @@ from plyer import notification
 from timer import Timer
 from commands import commands
 
-# reset feature (middle mouseclick)
 # when counting down show play button
 # doc requirements: pip install playsound and plyer
 # customizable format
@@ -29,6 +28,7 @@ from commands import commands
 
 # click-left = eggtimer-python/send_command.py
 # click-right = eggtimer-python/send_command.py toggle_loop
+# click-middle = eggtimer-python/send_command.py reset
 # scroll-up = eggtimer-python/send_command.py longer
 # scroll-down = eggtimer-python/send_command.py shorter
 
