@@ -11,11 +11,9 @@ from timer import Timer
 from commands import commands
 
 # all tests test ui
-# use an arg parsing lib
 # use a string assertion lib
 # customizable format
 # sound not playing fully
-# sound configurable
 # warn: Dropping unmatched character ︎ (U+fe0e) in '01:00⏸︎' ??
 # better ideas for when address already in use? port as argv
 # doc requirements: pip install playsound and plyer
@@ -40,9 +38,10 @@ class EggTimerApp:
     _quit = False
     _last_output = None
 
-    def __init__(self, duration, speed):
-        self._speed = speed
-        self._timer = Timer(duration, self.notify)
+    def __init__(self, args):
+        self._speed = args.speed
+        self._soundfile = self._path_to_sound(args.soundfile)
+        self._timer = Timer(args.duration, self.notify)
 
     def main(self):
         asyncio.run(self.egg_timer())
@@ -103,14 +102,21 @@ class EggTimerApp:
         notification.notify(title='Time over')
 
     def _play_sound(self):
+        playsound(self._soundfile, False)
+
+    def _path_to_sound(self, path):
+        if(path.startswith('/')):
+            return path
+
         dir = os.path.dirname(os.path.realpath(__file__))
-        playsound(dir + '/notification.wav', False)
+        return dir + '/' + path
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--duration", type=int, default=60, help="set the duration of the timer in seconds")
-    parser.add_argument("-s", "--speed", type=int, default=1, help="factor for the speed of the timer")
+    parser.add_argument("-d", "--duration", type=int, default=60, help="set the duration of the timer in seconds (int)")
+    parser.add_argument("-x", "--speed", type=int, default=1, help="factor for the speed of the timer (int)")
+    parser.add_argument("-s", "--soundfile", default="notification.wav", help="path to the file of the sound that plays when the timer finishes")
     args = parser.parse_args()
 
-    EggTimerApp(args.duration, args.speed).main()
+    EggTimerApp(args).main()

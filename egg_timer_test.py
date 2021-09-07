@@ -6,11 +6,11 @@ from egg_timer import EggTimerApp
 
 
 def test_app_run_through_timer():
-    egg_timer_output = os.popen('./egg_timer.py -d 3 -s 100')
+    egg_timer_output = os.popen('./egg_timer.py -d 3 -x 100')
 
     time.sleep(.1)
     os.system('./send_command.py toggle_play')
-    time.sleep(.3)
+    time.sleep(.4)
     os.system('./send_command.py quit')
 
     expected = '00:03 ⏸︎\n00:02 ▶️\n00:01 ▶️\n00:00 ▶️\n00:03 ⏸︎\n'
@@ -18,7 +18,7 @@ def test_app_run_through_timer():
 
 
 def test_app_just_quit():
-    egg_timer_output = os.popen('./egg_timer.py -d 3 -s 100')
+    egg_timer_output = os.popen('./egg_timer.py -d 3 -x 100')
 
     time.sleep(.1)
     os.system('./send_command.py quit')
@@ -27,7 +27,7 @@ def test_app_just_quit():
 
 
 def test_change_time_longer():
-    egg_timer_output = os.popen('./egg_timer.py -d 10 -s 100')
+    egg_timer_output = os.popen('./egg_timer.py -d 10 -x 100')
 
     time.sleep(.1)
     os.system('./send_command.py longer')
@@ -38,7 +38,7 @@ def test_change_time_longer():
 
 
 def test_change_time_shorter():
-    egg_timer_output = os.popen('./egg_timer.py -d 20 -s 100')
+    egg_timer_output = os.popen('./egg_timer.py -d 20 -x 100')
 
     time.sleep(.1)
     os.system('./send_command.py shorter')
@@ -49,7 +49,7 @@ def test_change_time_shorter():
 
 
 def test_app_pause():
-    egg_timer_output = os.popen('./egg_timer.py -d 3 -s 100')
+    egg_timer_output = os.popen('./egg_timer.py -d 3 -x 100')
 
     time.sleep(.1)
     os.system('./send_command.py toggle_play')
@@ -64,7 +64,7 @@ def test_app_pause():
 
 
 def test_reset():
-    egg_timer_output = os.popen('./egg_timer.py -d 600 -s 100')
+    egg_timer_output = os.popen('./egg_timer.py -d 600 -x 100')
 
     time.sleep(.1)
     os.system('./send_command.py toggle_play')
@@ -77,7 +77,7 @@ def test_reset():
 
 
 def test_loop():
-    egg_timer_output = os.popen('./egg_timer.py -d 3 -s 100')
+    egg_timer_output = os.popen('./egg_timer.py -d 3 -x 100')
 
     time.sleep(.1)
     os.system('./send_command.py toggle_loop')
@@ -89,7 +89,7 @@ def test_loop():
 
 
 def test_loop_and_play():
-    egg_timer_output = os.popen('./egg_timer.py -d 3 -s 100')
+    egg_timer_output = os.popen('./egg_timer.py -d 3 -x 100')
 
     time.sleep(.1)
     os.system('./send_command.py toggle_loop')
