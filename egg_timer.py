@@ -9,6 +9,7 @@ from plyer import notification
 from timer import Timer
 from commands import commands
 
+# reset feature (middle mouseclick)
 # when counting down show play button
 # doc requirements: pip install playsound and plyer
 # customizable format
