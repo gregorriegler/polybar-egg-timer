@@ -4,20 +4,21 @@ import time
 import asyncio
 import sys
 import os
+import argparse
 from playsound import playsound
 from plyer import notification
 from timer import Timer
 from commands import commands
 
-# when counting down show play button
+# all tests test ui
 # use an arg parsing lib
 # use a string assertion lib
-# doc requirements: pip install playsound and plyer
 # customizable format
 # sound not playing fully
 # sound configurable
 # warn: Dropping unmatched character ︎ (U+fe0e) in '01:00⏸︎' ??
 # better ideas for when address already in use? port as argv
+# doc requirements: pip install playsound and plyer
 
 # [module/egg-timer]
 # type = custom/script
@@ -107,12 +108,9 @@ class EggTimerApp:
 
 
 if __name__ == "__main__":
-    duration = 60
-    if(len(sys.argv) > 1):
-        duration = int(sys.argv[1])
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-d", "--duration", type=int, default=60, help="set the duration of the timer in seconds")
+    parser.add_argument("-s", "--speed", type=int, default=1, help="factor for the speed of the timer")
+    args = parser.parse_args()
 
-    speed = 1
-    if(len(sys.argv) > 2):
-        speed = int(sys.argv[2])
-
-    EggTimerApp(duration, speed).main()
+    EggTimerApp(args.duration, args.speed).main()
