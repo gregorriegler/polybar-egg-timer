@@ -116,3 +116,10 @@ def test_cant_go_shorter_than_1_after_pause():
     timer.shorter()
     timer.shorter()
     assert timer.time(60) == '00:10 ⏸︎'
+
+
+def test_resets():
+    timer = Timer(60)
+    timer.toggle_play(0)
+    timer.reset()
+    assert timer.time(30) == '01:00 ⏸︎'

@@ -9,7 +9,7 @@ def test_app_run_through_timer():
     egg_timer_output = os.popen('./egg_timer.py 3 100')
 
     time.sleep(.1)
-    os.system('./send_command.py')
+    os.system('./send_command.py toggle_play')
     time.sleep(.3)
     os.system('./send_command.py quit')
 
@@ -37,7 +37,7 @@ def test_change_time_longer():
     assert egg_timer_output.read() == '00:10 ⏸︎\n00:20 ⏸︎\n'
 
 
-def _test_change_time_shorter():
+def test_change_time_shorter():
     egg_timer_output = os.popen('./egg_timer.py 20 100')
 
     time.sleep(.1)
@@ -61,6 +61,19 @@ def test_app_pause():
 
     output = egg_timer_output.read()
     assert output.count('⏸︎') >= 2
+
+
+def test_reset():
+    egg_timer_output = os.popen('./egg_timer.py 600 100')
+
+    time.sleep(.1)
+    os.system('./send_command.py toggle_play')
+    time.sleep(.1)
+    os.system('./send_command.py reset')
+    time.sleep(.1)
+    os.system('./send_command.py quit')
+
+    assert egg_timer_output.read().endswith('10:00 ⏸︎\n')
 
 
 def test_loop():

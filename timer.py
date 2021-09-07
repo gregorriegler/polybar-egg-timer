@@ -18,6 +18,10 @@ class Timer:
             self._start = timestamp
             self._running = True
 
+    def reset(self):
+        self._running = False
+        self._stopped_at = self._value
+
     def toggle_loop(self):
         self._loop = not self._loop
 
