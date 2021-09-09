@@ -7,7 +7,7 @@ def test_app_run_through_timer():
 
     time.sleep(.1)
     os.system('./egg_timer_control.py toggle_play')
-    time.sleep(.4)
+    time.sleep(.8)
     os.system('./egg_timer_control.py quit')
 
     expected = '00:03 ⏸︎\n00:02 ▶️\n00:01 ▶️\n00:00 ▶️\n00:03 ⏸︎\n'
