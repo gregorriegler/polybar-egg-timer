@@ -3,6 +3,7 @@
 import argparse
 import asyncio
 import os
+import sys
 import time
 
 from playsound import playsound
@@ -77,8 +78,11 @@ class EggTimerApp:
             self._last_output = output
 
     def notify(self):
-        self._play_sound()
-        notification.notify(title='Time over')
+        try:
+            self._play_sound()
+            notification.notify(title='Time over')
+        except:
+            print('There was a Problem notifying', sys.exc_info()[0], file=sys.stderr)
 
     def _play_sound(self):
         playsound(self._soundfile, False)
