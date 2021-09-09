@@ -1,4 +1,5 @@
 import pytest
+
 from timer import TimerStatus, format_time
 
 

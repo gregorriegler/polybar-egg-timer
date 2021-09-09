@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
-import time
-import asyncio
-import sys
-import os
 import argparse
+import asyncio
+import os
+import time
+
 from playsound import playsound
 from plyer import notification
-from timer import Timer
+
 from commands import commands
+from timer import Timer
 
 
 class EggTimerApp:
