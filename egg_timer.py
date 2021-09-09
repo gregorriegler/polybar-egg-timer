@@ -10,10 +10,6 @@ from plyer import notification
 from timer import Timer
 from commands import commands
 
-# all tests test ui
-# use a string assertion lib
-# customizable format
-# sound not playing fully
 # warn: Dropping unmatched character ︎ (U+fe0e) in '01:00⏸︎' ??
 # better ideas for when address already in use? port as argv
 # doc requirements: pip install playsound and plyer
@@ -27,11 +23,11 @@ from commands import commands
 # format = <label>
 # label = %output%
 
-# click-left = eggtimer-python/send_command.py
-# click-right = eggtimer-python/send_command.py toggle_loop
-# click-middle = eggtimer-python/send_command.py reset
-# scroll-up = eggtimer-python/send_command.py longer
-# scroll-down = eggtimer-python/send_command.py shorter
+# click-left = eggtimer-python/egg_timer_control.py toggle_play
+# click-right = eggtimer-python/egg_timer_control.py toggle_loop
+# click-middle = eggtimer-python/egg_timer_control.py reset
+# scroll-up = eggtimer-python/egg_timer_control.py longer
+# scroll-down = eggtimer-python/egg_timer_control.py shorter
 
 class EggTimerApp:
 
