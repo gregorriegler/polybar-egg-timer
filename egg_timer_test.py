@@ -100,3 +100,12 @@ def test_loop_and_play():
 
     expected = '00:03 ⏸︎\n🔄 00:03 ⏸︎\n🔄 00:02 ▶️\n🔄 00:01 ▶️\n'
     assert expected in egg_timer_output.read()
+
+
+def test_different_format():
+    egg_timer_output = os.popen('./egg_timer.py -d 3 -f "ok {time}"')
+    time.sleep(.1)
+    os.system('./send_command.py quit')
+
+    expected = 'ok 00:03\n'
+    assert expected in egg_timer_output.read()

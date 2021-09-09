@@ -41,7 +41,7 @@ class EggTimerApp:
     def __init__(self, args):
         self._speed = args.speed
         self._soundfile = self._path_to_sound(args.soundfile)
-        self._timer = Timer(args.duration, self.notify)
+        self._timer = Timer(args.duration, self.notify, args.format)
 
     def main(self):
         asyncio.run(self.egg_timer())
@@ -117,6 +117,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--duration", type=int, default=60, help="set the duration of the timer in seconds (int)")
     parser.add_argument("-x", "--speed", type=int, default=1, help="factor for the speed of the timer (int)")
     parser.add_argument("-s", "--soundfile", default="notification.wav", help="path to the file of the sound that plays when the timer finishes")
+    parser.add_argument("-f", "--format", default="{loop} {time} {play/pause}", help="change the format of the timer. Default: {loop} {time} {play/pause}")
     args = parser.parse_args()
 
     EggTimerApp(args).main()

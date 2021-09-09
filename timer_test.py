@@ -123,3 +123,8 @@ def test_resets():
     timer.toggle_play(0)
     timer.reset()
     assert timer.time(30) == '01:00 ⏸︎'
+
+
+def _test_timer_format():
+    timer = Timer(60, format="")
+    assert timer.time(30) == ""
