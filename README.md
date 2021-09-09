@@ -1,6 +1,6 @@
 Egg-Timer for the Polybar
 =========================
-![example workflow](https://github.com/gregorriegler/polybar-egg-timer/actions/workflows/python-app.yml/badge.svg)
+[![example workflow](https://github.com/gregorriegler/polybar-egg-timer/actions/workflows/python-app.yml/badge.svg)](https://github.com/gregorriegler/polybar-egg-timer/actions/workflows/python-app.yml)
 
 ## Example Configuration
 ```
