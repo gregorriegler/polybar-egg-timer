@@ -6,7 +6,7 @@ better ideas for when address already in use
 
 doc requirements: pip install playsound and plyer
 
-
+the more you scroll the faster it should become
 
 -------------
 [module/egg-timer]
