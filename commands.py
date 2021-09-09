@@ -4,7 +4,8 @@ import asyncio
 HOST = '127.0.0.1'
 PORT = 65441
 
-async def commands(host = HOST, port = PORT):
+
+async def commands(host=HOST, port=PORT):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
         server.bind((host, port))
         server.listen()
@@ -24,4 +25,3 @@ async def commands(host = HOST, port = PORT):
             except Exception as e:
                 await asyncio.sleep(.1)
                 pass
-

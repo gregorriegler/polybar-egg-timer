@@ -5,7 +5,7 @@ import sys
 HOST = '127.0.0.1'  # The server's hostname or IP address
 PORT = 65441        # The port used by the server
 
-if(len(sys.argv) > 1):
+if len(sys.argv) > 1:
     command = sys.argv[1]
 else:
     command = 'toggle_play'

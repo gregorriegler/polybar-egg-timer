@@ -8,11 +8,12 @@ class Timer:
         self._notify = notify
         self._format = format
         self._stopped_at = value
+        self._start = None
         self._running = False
         self._loop = False
 
     def toggle_play(self, timestamp):
-        if(self._running):
+        if self._running:
             self._stopped_at = self._seconds_left(timestamp)
             self._running = False
         else:
@@ -35,7 +36,7 @@ class Timer:
     def change_time(self, amount):
         new_value = self._value + amount
         new_stopped_at = self._stopped_at + amount
-        if(new_value > 1 and new_stopped_at > 1):
+        if new_value > 1 and new_stopped_at > 1:
             self._value = new_value
             self._stopped_at = new_stopped_at
 
@@ -43,10 +44,10 @@ class Timer:
         return format_time(self._timer_status(timestamp), self._format)
 
     def _timer_status(self, timestamp):
-        if(not self._running):
+        if not self._running:
             return TimerStatus(self._stopped_at, False, self._loop)
         seconds_left = self._seconds_left(timestamp)
-        if(seconds_left == 0):
+        if seconds_left == 0:
             self._reset(timestamp)
             self._notify_over()
 
@@ -56,7 +57,7 @@ class Timer:
         return max(self._stopped_at - (timestamp - self._start), 0)
 
     def _reset(self, timestamp):
-        if(self._loop):
+        if self._loop:
             self._start = timestamp
             self._running = True
         else:
@@ -64,7 +65,7 @@ class Timer:
         self._stopped_at = self._value
 
     def _notify_over(self):
-        if(self._notify):
+        if self._notify:
             self._notify()
 
 

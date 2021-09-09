@@ -10,24 +10,6 @@ from plyer import notification
 from timer import Timer
 from commands import commands
 
-# warn: Dropping unmatched character ︎ (U+fe0e) in '01:00⏸︎' ??
-# better ideas for when address already in use? port as argv
-# doc requirements: pip install playsound and plyer
-
-# [module/egg-timer]
-# type = custom/script
-
-# exec = eggtimer-python/egg_timer.py
-# tail = true
-
-# format = <label>
-# label = %output%
-
-# click-left = eggtimer-python/egg_timer_control.py toggle_play
-# click-right = eggtimer-python/egg_timer_control.py toggle_loop
-# click-middle = eggtimer-python/egg_timer_control.py reset
-# scroll-up = eggtimer-python/egg_timer_control.py longer
-# scroll-down = eggtimer-python/egg_timer_control.py shorter
 
 class EggTimerApp:
 
@@ -54,7 +36,7 @@ class EggTimerApp:
     async def receive_commands(self):
         async for command in commands():
             self.handle_command(command)
-            if(self._quit):
+            if self._quit:
                 break
 
     def handle_command(self, command):
@@ -89,7 +71,7 @@ class EggTimerApp:
         return time.time() * self._speed
 
     def print_once(self, output):
-        if(output != self._last_output):
+        if output != self._last_output:
             print(output, flush=True)
             self._last_output = output
 
@@ -101,11 +83,10 @@ class EggTimerApp:
         playsound(self._soundfile, False)
 
     def _path_to_sound(self, path):
-        if(path.startswith('/')):
+        if path.startswith('/'):
             return path
 
-        dir = os.path.dirname(os.path.realpath(__file__))
-        return dir + '/' + path
+        return os.path.dirname(os.path.realpath(__file__)) + '/' + path
 
 
 if __name__ == "__main__":

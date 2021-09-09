@@ -1,8 +1,5 @@
-import io
-import threading
-import time
 import os
-from egg_timer import EggTimerApp
+import time
 
 
 def test_app_run_through_timer():

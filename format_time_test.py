@@ -3,7 +3,7 @@ from timer import TimerStatus, format_time
 
 
 @pytest.mark.parametrize(
-        "playing, looping, format, expected",
+    "playing, looping, format, expected",
     [
         (True, True, "", ""),
         (True, False, "random string", "random string"),
