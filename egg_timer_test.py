@@ -81,7 +81,7 @@ def test_loop():
     time.sleep(.1)
     os.system('./egg_timer_control.py quit')
 
-    expected = '00:03 ⏸︎\n🔄 00:03 ⏸︎\n'
+    expected = '00:03 ⏸︎\n00:03 🔄⏸︎\n'
     assert egg_timer_output.read() == expected
 
 
@@ -95,7 +95,7 @@ def test_loop_and_play():
     time.sleep(.1)
     os.system('./egg_timer_control.py quit')
 
-    expected = '00:03 ⏸︎\n🔄 00:03 ⏸︎\n🔄 00:02 ▶️\n🔄 00:01 ▶️\n'
+    expected = '00:03 ⏸︎\n00:03 🔄⏸︎\n00:02 🔄▶️\n00:01 🔄▶️\n'
     assert expected in egg_timer_output.read()
 
 

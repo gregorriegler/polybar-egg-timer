@@ -3,10 +3,10 @@ from datetime import timedelta
 
 class Timer:
 
-    def __init__(self, value=60, notify=None, format="{loop} {time} {play/pause}"):
+    def __init__(self, value, notify=None, format='{time} {loop}{play/pause}'):
         self._value = value
-        self._notify = notify
         self._format = format
+        self._notify = notify
         self._stopped_at = value
         self._start = None
         self._running = False
@@ -69,11 +69,6 @@ class Timer:
             self._notify()
 
 
-def mmss(seconds):
-    td = timedelta(seconds=seconds)
-    return str(td)[2:7]
-
-
 class TimerStatus:
 
     def __init__(self, seconds_left, playing, looping):
@@ -82,7 +77,7 @@ class TimerStatus:
         self.looping = looping
 
 
-def format_time(timer_status, format="{loop} {time} {play/pause}"):
+def format_time(timer_status, format):
     return format\
         .replace("{loop}", "🔄" if timer_status.looping else "")\
         .replace("{time}", _mmss(timer_status.seconds_left))\

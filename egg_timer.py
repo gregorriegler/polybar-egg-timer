@@ -101,7 +101,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--duration", type=int, default=60, help="Set the duration of the timer in seconds (int). Default: 60")
     parser.add_argument("-x", "--speed", type=int, default=1, help="Factor for the speed of the timer (int). Default: 1")
     parser.add_argument("-s", "--soundfile", default="notification.wav", help="Path to the file of the sound that plays when the timer finishes. Default: 'notification.wav'")
-    parser.add_argument("-f", "--format", default="{loop} {time} {play/pause}", help="Change the format of the timer. Default: '{loop} {time} {play/pause}'")
+    parser.add_argument("-f", "--format", default="{time} {loop}{play/pause}", help="Change the format of the timer. Default: '{time} {loop}{play/pause}'")
     parser.add_argument("-host", default='127.0.0.1', help="Host on which the egg-timer listens for commands. Default: '127.0.0.1'")
     parser.add_argument("-p", "--port", type=int, default=65441, help="Port on which the egg-timer listens for commands (int). Default: 65441")
     args = parser.parse_args()
