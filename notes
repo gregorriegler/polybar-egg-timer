@@ -1,25 +1,2 @@
-warn: Dropping unmatched character ︎ (U+fe0e) in '01:00⏸︎'
- -> https://github.com/polybar/polybar/issues/2186
-
-better ideas for when address already in use
- -> port as argv
-
-doc requirements: pip install playsound and plyer
-
+Ideas:
 the more you scroll the faster it should become
-
--------------
-[module/egg-timer]
-type = custom/script
-
-exec = eggtimer-python/egg_timer.py
-tail = true
-
-format = <label>
-label = %output%
-
-click-left = eggtimer-python/egg_timer_control.py toggle_play
-click-right = eggtimer-python/egg_timer_control.py toggle_loop
-click-middle = eggtimer-python/egg_timer_control.py reset
-scroll-up = eggtimer-python/egg_timer_control.py longer
-scroll-down = eggtimer-python/egg_timer_control.py shorter
