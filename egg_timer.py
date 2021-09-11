@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import argparse
 import asyncio
@@ -43,14 +44,14 @@ async def _commands(host, port):
 
 
 class EggTimerApp:
-
     _quit = False
     _last_output = None
 
     def __init__(self, args):
         self._speed = args.speed
         self._sound_file = _path_to_sound(args.soundfile)
-        self._timer = Timer(args.duration, self.notify, args.format)
+        icons = {'play': args.playicon, 'pause': args.pauseicon, 'loop': args.loopicon}
+        self._timer = Timer(args.duration, self.notify, args.format, icons)
         self._host = args.host
         self._port = args.port
 
@@ -64,7 +65,7 @@ class EggTimerApp:
         while not self._quit:
             output = self._timer.time(self._timestamp())
             self.print_once(output)
-            await asyncio.sleep(1/(self._speed*10))
+            await asyncio.sleep(1 / (self._speed * 10))
 
     async def receive_commands(self):
         async for command in _commands(self._host, self._port):
@@ -121,12 +122,21 @@ class EggTimerApp:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--duration", type=int, default=60, help="Set the duration of the timer in seconds (int). Default: 60")
-    parser.add_argument("-x", "--speed", type=int, default=1, help="Factor for the speed of the timer (int). Default: 1")
-    parser.add_argument("-s", "--soundfile", default="notification.wav", help="Path to the file of the sound that plays when the timer finishes. Default: 'notification.wav'")
-    parser.add_argument("-f", "--format", default="{time} {loop}{play/pause}", help="Change the format of the timer. Default: '{time} {loop}{play/pause}'")
-    parser.add_argument("-host", default='127.0.0.1', help="Host on which the egg-timer listens for commands. Default: '127.0.0.1'")
-    parser.add_argument("-p", "--port", type=int, default=65441, help="Port on which the egg-timer listens for commands (int). Default: 65441")
+    parser.add_argument("-d", "--duration", type=int, default=60,
+                        help="Set the duration of the timer in seconds (int). Default: 60")
+    parser.add_argument("-x", "--speed", type=int, default=1,
+                        help="Factor for the speed of the timer (int). Default: 1")
+    parser.add_argument("-s", "--soundfile", default="notification.wav",
+                        help="Path to the file of the sound that plays when the timer finishes. Default: 'notification.wav'")
+    parser.add_argument("-f", "--format", default="{time} {loop}{play/pause}",
+                        help="Change the format of the timer. Default: '{time} {loop}{play/pause}'")
+    parser.add_argument("-playicon", default="▶", help="Change the play icon. Default: ▶")
+    parser.add_argument("-pauseicon", default="⏸︎", help="Change the pause icon. Default: ⏸")
+    parser.add_argument("-loopicon", default="🔄", help="Change the loop icon. Default: 🔄")
+    parser.add_argument("-host", default='127.0.0.1',
+                        help="Host on which the egg-timer listens for commands. Default: '127.0.0.1'")
+    parser.add_argument("-p", "--port", type=int, default=65441,
+                        help="Port on which the egg-timer listens for commands (int). Default: 65441")
     args = parser.parse_args()
 
     EggTimerApp(args).main()

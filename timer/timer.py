@@ -3,9 +3,13 @@ from datetime import timedelta
 
 class Timer:
 
-    def __init__(self, value, notify=None, format='{time} {loop}{play/pause}'):
+    def __init__(self, value, notify=None, format='{time} {loop}{play/pause}', icons=None):
         self._value = value
         self._format = format
+        if icons is None:
+            self._icons = {'play': '▶', 'pause': '⏸', 'loop': '🔄'}
+        else:
+            self._icons = icons
         self._notify = notify
         self._stopped_at = value
         self._start = None
@@ -41,7 +45,7 @@ class Timer:
             self._stopped_at = new_stopped_at
 
     def time(self, timestamp):
-        return format_time(self._timer_status(timestamp), self._format)
+        return format_time(self._timer_status(timestamp), self._format, self._icons)
 
     def _timer_status(self, timestamp):
         if not self._running:
@@ -77,11 +81,11 @@ class TimerStatus:
         self.looping = looping
 
 
-def format_time(timer_status, format):
+def format_time(timer_status, format, icons):
     return format\
-        .replace("{loop}", "🔄" if timer_status.looping else "")\
+        .replace("{loop}", icons.get('loop') if timer_status.looping else "")\
         .replace("{time}", _mmss(timer_status.seconds_left))\
-        .replace("{play/pause}", "▶️" if timer_status.playing else "⏸︎")\
+        .replace("{play/pause}", icons.get('play') if timer_status.playing else icons.get('pause'))\
         .strip()
 
 

@@ -10,7 +10,7 @@ def test_app_run_through_timer():
     time.sleep(.4)
     os.system('./egg_timer_control.py quit')
 
-    expected = '00:03 ⏸︎\n00:02 ▶️\n00:01 ▶️\n00:00 ▶️\n00:03 ⏸︎\n'
+    expected = '00:03 ⏸︎\n00:02 ▶\n00:01 ▶\n00:00 ▶\n00:03 ⏸︎\n'
     assert egg_timer_output.read() == expected
 
 
@@ -57,7 +57,7 @@ def test_app_pause():
     time.sleep(.1)
 
     output = egg_timer_output.read()
-    assert output.count('⏸︎') >= 2
+    assert output.count('⏸') >= 2
 
 
 def test_reset():
@@ -95,7 +95,7 @@ def test_loop_and_play():
     time.sleep(.1)
     os.system('./egg_timer_control.py quit')
 
-    expected = '00:03 ⏸︎\n00:03 🔄⏸︎\n00:02 🔄▶️\n00:01 🔄▶️\n'
+    expected = '00:03 ⏸︎\n00:03 🔄⏸︎\n00:02 🔄▶\n00:01 🔄▶\n'
     assert expected in egg_timer_output.read()
 
 

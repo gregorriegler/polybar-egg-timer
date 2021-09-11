@@ -54,7 +54,7 @@ The Egg-Timer is built of two scripts.
 ### Arguments
 ```
 > ./egg_timer.py -h                             
-usage: egg_timer.py [-h] [-d DURATION] [-x SPEED] [-s SOUNDFILE] [-f FORMAT] [-host HOST] [-p PORT]
+usage: egg_timer.py [-h] [-d DURATION] [-x SPEED] [-s SOUNDFILE] [-f FORMAT] [-playicon PLAYICON] [-pauseicon PAUSEICON] [-loopicon LOOPICON] [-host HOST] [-p PORT]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -63,10 +63,12 @@ optional arguments:
   -x SPEED, --speed SPEED
                         Factor for the speed of the timer (int). Default: 1
   -s SOUNDFILE, --soundfile SOUNDFILE
-                        Path to the file of the sound that plays when the timer finishes. Default:
-                        'notification.wav'
+                        Path to the file of the sound that plays when the timer finishes. Default: 'notification.wav'
   -f FORMAT, --format FORMAT
-                        Change the format of the timer. Default: '{loop} {time} {play/pause}'
+                        Change the format of the timer. Default: '{time} {loop}{play/pause}'
+  -playicon PLAYICON    Change the play icon. Default: ▶
+  -pauseicon PAUSEICON  Change the pause icon. Default: ⏸
+  -loopicon LOOPICON    Change the loop icon. Default: 🔄
   -host HOST            Host on which the egg-timer listens for commands. Default: '127.0.0.1'
   -p PORT, --port PORT  Port on which the egg-timer listens for commands (int). Default: 65441
 ```
