@@ -2,27 +2,45 @@ Egg-Timer for the Polybar
 =========================
 [![build](https://github.com/gregorriegler/polybar-egg-timer/actions/workflows/python-app.yml/badge.svg)](https://github.com/gregorriegler/polybar-egg-timer/actions/workflows/python-app.yml)
 
-## Prerequisites
+## Features
+![Egg Timer image][egg-timer.png]
+
+- Sound Notification
+- On-Screen Display Notification
+- Pause and Resume
+- Loop
+- Change Time
+- Reset
+
+## Install
+
+### Prerequisites
 - Python 3
 - `pip install playsound` for sound notification
 - `pip install plyer` for textual notification
 
-## Example Configuration
+### Clone/Download this Repo
+```
+cd ~/.config/polybar/scripts
+git clone https://github.com/gregorriegler/polybar-egg-timer
+```
+
+### Example Configuration
 ```
 [module/egg-timer]
 type = custom/script
 
-exec = /path-to-eggtimer/egg_timer.py
+exec = /path-to-egg-timer/egg_timer.py
 tail = true
 
 format = <label>
 label = %output%
 
-click-left = /path-to-eggtimer/egg_timer_control.py toggle_play
-click-right = /path-to-eggtimer/egg_timer_control.py toggle_loop
-click-middle = /path-to-eggtimer/egg_timer_control.py reset
-scroll-up = /path-to-eggtimer/egg_timer_control.py longer
-scroll-down = /path-to-eggtimer/egg_timer_control.py shorter
+click-left = /path-to-egg-timer/egg_timer_control.py toggle_play
+click-right = /path-to-egg-timer/egg_timer_control.py toggle_loop
+click-middle = /path-to-egg-timer/egg_timer_control.py reset
+scroll-up = /path-to-egg-timer/egg_timer_control.py longer
+scroll-down = /path-to-egg-timer/egg_timer_control.py shorter
 ```
 
 ## What you should know
