@@ -5,7 +5,6 @@ Egg-Timer for the Polybar
 ## Features
 
 ![Egg Timer In Action](egg-timer.png)
-
 - Sound Notification
 - On-Screen Display Notification
 - Pause and Resume
