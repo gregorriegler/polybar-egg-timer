@@ -3,7 +3,8 @@ Egg-Timer for the Polybar
 [![build](https://github.com/gregorriegler/polybar-egg-timer/actions/workflows/python-app.yml/badge.svg)](https://github.com/gregorriegler/polybar-egg-timer/actions/workflows/python-app.yml)
 
 ## Features
-![Egg Timer image][egg-timer.png]
+
+![Egg Timer In Action](egg-timer.png)
 
 - Sound Notification
 - On-Screen Display Notification
