@@ -1,5 +1,5 @@
 import pytest
-from timer import Timer
+from timer.timer import Timer
 
 
 notified = ''
@@ -67,7 +67,7 @@ def test_loops():
 def test_notifies_after_reset():
     timer = Timer(60, notify)
     timer.toggle_play(0)
-    timer.time(60) == '00:00 ▶️'
+    assert timer.time(60) == '00:00 ▶️'
     timer.toggle_play(100)
     assert timer.time(160) == '00:00 ▶️'
     assert notified == 'notifiednotified'

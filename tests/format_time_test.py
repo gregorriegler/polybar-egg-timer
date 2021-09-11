@@ -1,6 +1,6 @@
 import pytest
 
-from timer import TimerStatus, format_time
+from timer.timer import TimerStatus, format_time
 
 
 @pytest.mark.parametrize(

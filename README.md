@@ -46,7 +46,7 @@ scroll-down = /path-to-egg-timer/egg_timer_control.py shorter
 ## What you should know
 The Egg-Timer is built of two scripts.
 
-- `egg_timer.py`, which runs the timer and is displayed in your bar. it listens for commands on a socket.
+- `egg_timer.py`, which runs the timer and is displayed in your bar. It listens for commands on a socket.
 - `egg_timer_control.py`, which you can use to send commands to the timer.
 
 ## egg_timer.py

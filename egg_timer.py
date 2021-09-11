@@ -3,14 +3,43 @@
 import argparse
 import asyncio
 import os
+import socket
 import sys
 import time
 
 from playsound import playsound
 from plyer import notification
 
-from commands import commands
-from timer import Timer
+from timer.timer import Timer
+
+
+def _path_to_sound(path):
+    if path.startswith('/'):
+        return path
+
+    return os.path.dirname(os.path.realpath(__file__)) + '/' + path
+
+
+async def _commands(host, port):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
+        server.bind((host, port))
+        server.listen()
+        server.setblocking(False)
+        while True:
+            try:
+                connection, _ = server.accept()
+                with connection:
+                    while True:
+                        if not connection:
+                            break
+                        data = connection.recv(1024)
+                        if not data:
+                            break
+                        command = data.decode('utf-8')
+                        yield command
+            except Exception:
+                await asyncio.sleep(.1)
+                pass
 
 
 class EggTimerApp:
@@ -20,7 +49,7 @@ class EggTimerApp:
 
     def __init__(self, args):
         self._speed = args.speed
-        self._sound_file = self._path_to_sound(args.soundfile)
+        self._sound_file = _path_to_sound(args.soundfile)
         self._timer = Timer(args.duration, self.notify, args.format)
         self._host = args.host
         self._port = args.port
@@ -38,7 +67,7 @@ class EggTimerApp:
             await asyncio.sleep(1/(self._speed*10))
 
     async def receive_commands(self):
-        async for command in commands(self._host, self._port):
+        async for command in _commands(self._host, self._port):
             self.handle_command(command)
             if self._quit:
                 break
@@ -88,12 +117,6 @@ class EggTimerApp:
 
     def _play_sound(self):
         playsound(self._sound_file, False)
-
-    def _path_to_sound(self, path):
-        if path.startswith('/'):
-            return path
-
-        return os.path.dirname(os.path.realpath(__file__)) + '/' + path
 
 
 if __name__ == "__main__":
