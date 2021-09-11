@@ -10,7 +10,7 @@ Egg-Timer for the Polybar
 - On-Screen Display Notification
 - Pause and Resume
 - Loop
-- Change Time
+- Increase/Decrease Time
 - Reset
 
 ## Install
