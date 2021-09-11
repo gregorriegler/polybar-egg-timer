@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
+import argparse
 import socket
-import sys
 
-HOST = '127.0.0.1'  # The server's hostname or IP address
-PORT = 65441        # The port used by the server
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('command', choices=['toggle_play', 'reset', 'toggle_loop', 'longer', 'shorter', 'quit'])
+    parser.add_argument("-host", default='127.0.0.1', help="Host where the control sends commands to. Default: '127.0.0.1'")
+    parser.add_argument("-p", "--port", type=int, default=65441, help="Port on which the control sends commands (int). Default: 65441")
+    args = parser.parse_args()
 
-if len(sys.argv) > 1:
-    command = sys.argv[1]
-else:
-    command = 'toggle_play'
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((args.host, args.port))
+        s.sendall(bytearray(args.command, 'utf-8'))
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
-    s.sendall(bytearray(command, 'utf-8'))
+
+
 
 
