@@ -39,7 +39,7 @@ def test_change_time_shorter():
 
     time.sleep(.1)
     os.system('./egg_timer_control.py shorter')
-    time.sleep(.1)
+    time.sleep(.3)
     os.system('./egg_timer_control.py quit')
 
     assert egg_timer_output.read() == '00:20 ⏸︎\n00:10 ⏸︎\n'
